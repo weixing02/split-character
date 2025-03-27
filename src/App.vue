@@ -75,7 +75,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 0.2rem;
   background: radial-gradient(
       circle at 10% 20%,
       rgba(67, 97, 238, 0.1) 0%,
@@ -215,7 +215,7 @@ input:focus {
 /* 响应式设计 */
 @media (max-width: 768px) {
   #app {
-    padding: 1rem;
+    padding: 0.4rem;
   }
 }
 </style>

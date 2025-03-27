@@ -1,8 +1,8 @@
 <template>
   <section class="collection-display">
-    <h2 class="collection-title">人格卡片</h2>
+    <h2 class="collection-title">我的人格卡片</h2>
     <p v-if="collection.length === 0" class="empty-collection">
-      你的收藏是空的。提交你的周末计划来发现隐藏人格！
+      你的卡片竟然是空的。提交你的周末计划来发现隐藏人格！
     </p>
 
     <div class="card-grid" v-else>

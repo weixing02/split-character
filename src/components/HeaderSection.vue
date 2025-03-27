@@ -1,6 +1,6 @@
 <template>
   <header class="header-section">
-    <h1 class="title">周末人格分裂 split！</h1>
+    <h1 class="title">split!!</h1>
   </header>
 </template>
 
@@ -19,7 +19,7 @@ export default {
 <style scoped>
 .header-section {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   padding: 2rem;
   background: var(--card-bg);
   border-radius: 20px;
@@ -151,7 +151,7 @@ h1::after {
 
 @media (max-width: 768px) {
   .header-section {
-    padding: 1.5rem;
+    padding: 0.3rem 1rem;
   }
 
   h1 {

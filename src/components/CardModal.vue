@@ -109,13 +109,16 @@ export default {
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  z-index: 1000;
-  animation: fade-in 0.3s ease;
+  z-index: 100;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .card-modal {
+  max-height: 96vh;
+  overflow-y: auto;
   background: var(--bg-card);
   border-radius: var(--border-radius-lg);
   padding: 2rem;
@@ -125,7 +128,6 @@ export default {
   animation: slide-up 0.3s ease;
   box-shadow: var(--shadow-lg), 0 0 40px rgba(67, 97, 238, 0.2);
   border: 1px solid rgba(67, 97, 238, 0.2);
-  overflow: hidden;
 }
 
 .card-modal::before {
@@ -192,7 +194,7 @@ export default {
 }
 
 .card-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 900;
   margin-bottom: 1rem;
   background: var(--primary-gradient);
@@ -465,7 +467,7 @@ export default {
   }
 
   .card-title {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .card-animation {
@@ -473,8 +475,8 @@ export default {
   }
 
   .character-img {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
   }
 
   .card-stats {
@@ -488,6 +490,33 @@ export default {
 
   .level-stars {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-modal {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+  }
+
+  .card-type {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .card-stats {
+    gap: 0.6rem;
+  }
+
+  .stat-name {
+    font-size: 0.7rem;
+  }
+
+  .stat-value {
+    font-size: 0.9rem;
   }
 }
 </style>

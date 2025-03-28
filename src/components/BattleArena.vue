@@ -179,6 +179,62 @@
         </div>
 
         <button @click="restartBattle" class="confirm-button">再来一次</button>
+
+        <!-- 游戏推荐列表 -->
+        <div class="game-recommends result-game-recommends">
+          <h3 class="recommend-title">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+              ></path>
+            </svg>
+            你该试试这些游戏！
+          </h3>
+
+          <div class="game-list">
+            <div
+              v-for="(game, index) in gameList"
+              :key="index"
+              class="game-card"
+            >
+              <div class="game-icon">
+                <img :src="game.icon" :alt="game.name" />
+              </div>
+              <div class="game-info">
+                <h4 class="game-name">{{ game.name }}</h4>
+                <p class="game-desc">{{ game.description }}</p>
+                <div class="game-tags">
+                  <span
+                    v-for="(tag, i) in game.tags"
+                    :key="i"
+                    class="game-tag"
+                    >{{ tag }}</span
+                  >
+                </div>
+              </div>
+              <a :href="game.link" class="install-btn" target="_blank">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                安装
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -196,6 +252,55 @@
         </svg>
         跳过对战
       </button>
+    </div>
+
+    <!-- 游戏推荐列表 -->
+    <div class="game-recommends">
+      <h3 class="recommend-title">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+          ></path>
+        </svg>
+        你该试试这些游戏！
+      </h3>
+
+      <div class="game-list">
+        <div v-for="(game, index) in gameList" :key="index" class="game-card">
+          <div class="game-icon">
+            <img :src="game.icon" :alt="game.name" />
+          </div>
+          <div class="game-info">
+            <h4 class="game-name">{{ game.name }}</h4>
+            <p class="game-desc">{{ game.description }}</p>
+            <div class="game-tags">
+              <span v-for="(tag, i) in game.tags" :key="i" class="game-tag">{{
+                tag
+              }}</span>
+            </div>
+          </div>
+          <a :href="game.link" class="install-btn" target="_blank">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            安装
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -233,6 +338,39 @@ export default {
       currentProductiveDialog: "",
       showResult: false,
       fortuneTags: [],
+      mbtiType: "", // 存储生成的MBTI类型
+      fortuneMessage: "", // 存储生成的运势消息
+      gameList: [
+        {
+          name: "摸鱼达人2023",
+          icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%234361ee' opacity='0.1'/%3E%3Ccircle cx='50' cy='50' r='40' fill='%234361ee' opacity='0.2'/%3E%3Cpath d='M65 35H35c-2.8 0-5 2.2-5 5v20c0 2.8 2.2 5 5 5h30c2.8 0 5-2.2 5-5V40c0-2.8-2.2-5-5-5z' fill='%234361ee'/%3E%3Cpath d='M45 45h10v10H45z' fill='white'/%3E%3Cpath d='M60 45h5v5h-5zM60 55h5v5h-5zM35 45h5v5h-5zM35 55h5v5h-5z' fill='white'/%3E%3Cpath d='M40 70c0 1.1 0.9 2 2 2h16c1.1 0 2-0.9 2-2v-5H40v5z' fill='%234361ee'/%3E%3Cpath d='M50 30c-1.1 0-2 0.9-2 2v3h4v-3c0-1.1-0.9-2-2-2z' fill='%234361ee'/%3E%3C/svg%3E",
+          description:
+            "挑战你懒惰的极限，看看你能在不被炒鱿鱼的情况下摸鱼多久。",
+          tags: ["策略", "休闲", "模拟"],
+          link: "https://store.steampowered.com",
+        },
+        {
+          name: "效率冲击：终极任务",
+          icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2300f5d4' opacity='0.1'/%3E%3Ccircle cx='50' cy='50' r='40' fill='%2300f5d4' opacity='0.2'/%3E%3Cpath d='M75 35H65V25c0-1.1-0.9-2-2-2H37c-1.1 0-2 0.9-2 2v10H25c-1.1 0-2 0.9-2 2v38c0 1.1 0.9 2 2 2h50c1.1 0 2-0.9 2-2V37c0-1.1-0.9-2-2-2z' fill='%2300f5d4'/%3E%3Cpath d='M39 27h22v8H39z' fill='white'/%3E%3Cpath d='M40 50l5-5 5 5 10-10 5 5' fill='none' stroke='white' stroke-width='2'/%3E%3Ccircle cx='30' cy='65' r='3' fill='white'/%3E%3Ccircle cx='40' cy='65' r='3' fill='white'/%3E%3Ccircle cx='50' cy='65' r='3' fill='white'/%3E%3Ccircle cx='60' cy='65' r='3' fill='white'/%3E%3Ccircle cx='70' cy='65' r='3' fill='white'/%3E%3C/svg%3E",
+          description: "通过时间管理挑战和任务规划，成为真正的效率专家。",
+          tags: ["管理", "自我提升", "模拟"],
+          link: "https://apps.apple.com",
+        },
+        {
+          name: "性格迷城：MBTI探险",
+          icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f687b3' opacity='0.1'/%3E%3Ccircle cx='50' cy='50' r='40' fill='%23f687b3' opacity='0.2'/%3E%3Cpath d='M30 30h40v40H30z' fill='%23f687b3'/%3E%3Ccircle cx='40' cy='40' r='5' fill='white'/%3E%3Ccircle cx='60' cy='40' r='5' fill='white'/%3E%3Cpath d='M35 55c0 8.3 6.7 15 15 15s15-6.7 15-15H35z' fill='white'/%3E%3Cpath d='M25 75l10-10M75 75l-10-10' stroke='%23f687b3' stroke-width='3'/%3E%3Ccircle cx='20' cy='80' r='5' fill='%23f687b3'/%3E%3Ccircle cx='80' cy='80' r='5' fill='%23f687b3'/%3E%3Cpath d='M40 25c0-5.5-4.5-10-10-10v10h10zM60 25c0-5.5 4.5-10 10-10v10H60z' fill='%23f687b3'/%3E%3C/svg%3E",
+          description: "探索16种性格类型的奇妙世界，结交志同道合的朋友。",
+          tags: ["社交", "角色扮演", "探索"],
+          link: "https://play.google.com",
+        },
+        {
+          name: "平衡大师：天秤传说",
+          icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%235f27cd' opacity='0.1'/%3E%3Ccircle cx='50' cy='50' r='40' fill='%235f27cd' opacity='0.2'/%3E%3Cpath d='M50 20v60' stroke='%235f27cd' stroke-width='4'/%3E%3Cpath d='M30 70h40' stroke='%235f27cd' stroke-width='4'/%3E%3Ccircle cx='50' cy='75' r='5' fill='%235f27cd'/%3E%3Cpath d='M25 45h50' stroke='%235f27cd' stroke-width='2'/%3E%3Ccircle cx='35' cy='45' r='10' fill='%235f27cd'/%3E%3Ccircle cx='65' cy='45' r='5' fill='%235f27cd'/%3E%3Cpath d='M20 30c0-5.5 4.5-10 10-10s10 4.5 10 10h-20zM60 30c0-5.5 4.5-10 10-10s10 4.5 10 10H60z' fill='%235f27cd'/%3E%3C/svg%3E",
+          description: "在工作和生活之间找到完美平衡，成为平衡艺术大师。",
+          tags: ["休闲", "益智", "生活模拟"],
+          link: "https://store.steampowered.com",
+        },
+      ],
     };
   },
   mounted() {
@@ -425,6 +563,10 @@ export default {
     },
     endBattle() {
       this.currentPhase = "result";
+
+      // 生成并保存MBTI类型和运势
+      this.mbtiType = this.generateMBTIType();
+      this.fortuneMessage = this.generateFortuneMessage();
       this.generateFortuneTags();
 
       // 判断胜负
@@ -492,7 +634,9 @@ export default {
         this.lazyHP = randomHP;
       }
 
-      // 生成运势标签
+      // 生成并保存MBTI类型和运势
+      this.mbtiType = this.generateMBTIType();
+      this.fortuneMessage = this.generateFortuneMessage();
       this.generateFortuneTags();
     },
     generateFortuneTags() {
@@ -534,11 +678,31 @@ export default {
         },
       };
 
+      const mbtiTitles = {
+        INTJ: "全知暗影",
+        INTP: "灵魂黑客",
+        ENTJ: "霸道总裁",
+        ENTP: "神秘魔术师",
+        INFJ: "闪电皮卡丘",
+        INFP: "奶茶仙子",
+        ENFJ: "团宠小太阳",
+        ENFP: "彩虹独角兽",
+        ISTJ: "守序扫地机器人",
+        ISFJ: "暖心奶爸",
+        ESTJ: "铁血教练",
+        ESFJ: "学霸村长",
+        ISTP: "熊猫侠",
+        ISFP: "二次元主角",
+        ESTP: "极限运动王",
+        ESFP: "派对恶魔",
+      };
+
       const selectedType = this.selectedSide;
       const traits = mbtiTraits[selectedType];
-      const personality = this.generateMBTIType();
+      const title = mbtiTitles[this.mbtiType] || "未知旅行者";
 
-      return `你的MBTI类型倾向：${personality}\n
+      // 使用保存的MBTI类型，而不是每次都重新生成
+      return `你的MBTI类型倾向：${this.mbtiType}「${title}」\n
 ${traits.E}/${traits.I}\n
 ${traits.S}/${traits.N}\n
 ${traits.T}/${traits.F}\n
@@ -557,6 +721,10 @@ ${traits.J}/${traits.P}\n
       return result;
     },
     getDailyFortune() {
+      // 返回保存的运势消息，而不是每次都重新生成
+      return this.fortuneMessage;
+    },
+    generateFortuneMessage() {
       const fortunes = [
         "今日宜：摆烂、躺平、划水。忌：内卷、熬夜、赶ddl。",
         "王阳明曰：躺平时要躺得优雅，卷起来要卷得漂亮。",
@@ -593,6 +761,8 @@ ${traits.J}/${traits.P}\n
       this.currentProductiveDialog = "";
       this.showResult = false;
       this.fortuneTags = [];
+      this.mbtiType = ""; // 重置MBTI类型
+      this.fortuneMessage = ""; // 重置运势消息
     },
     getDialogMessage(side, type) {
       const dialogs = {
@@ -987,6 +1157,8 @@ ${traits.J}/${traits.P}\n
 
 .round-info {
   font-size: 0.8rem;
+  text-align: center;
+  white-space: nowrap;
   font-weight: 600;
 }
 
@@ -1019,6 +1191,8 @@ ${traits.J}/${traits.P}\n
   position: relative;
   border: 1px solid rgba(67, 97, 238, 0.2);
   box-shadow: var(--shadow-lg), 0 0 20px rgba(67, 97, 238, 0.2);
+  overflow-y: auto;
+  max-height: 85vh;
 }
 
 .result-content::before {
@@ -1371,6 +1545,243 @@ ${traits.J}/${traits.P}\n
   }
   100% {
     opacity: 0.6;
+  }
+}
+
+.game-recommends {
+  margin-top: 1.5rem;
+  background: var(--bg-light);
+  border-radius: var(--border-radius-lg);
+  padding: 1rem;
+  border: 1px solid rgba(67, 97, 238, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-recommends::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--secondary-gradient);
+}
+
+.recommend-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.recommend-title svg {
+  width: 18px;
+  height: 18px;
+  color: var(--secondary);
+}
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.game-card {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--bg-card);
+  border-radius: var(--border-radius-md);
+  padding: 0.8rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+  border: 1px solid rgba(67, 97, 238, 0.1);
+}
+
+.game-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.game-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.game-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.game-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+}
+
+.game-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.game-tag {
+  font-size: 0.7rem;
+  color: var(--secondary);
+  background: rgba(0, 245, 212, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.install-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: var(--secondary-gradient);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+  width: 70px;
+  gap: 0.3rem;
+}
+
+.install-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.install-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* 平板和桌面端优化 */
+@media (min-width: 768px) {
+  .game-recommends {
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .recommend-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .recommend-title svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .game-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .game-card {
+    padding: 1rem;
+  }
+
+  .game-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .game-name {
+    font-size: 1rem;
+  }
+
+  .game-desc {
+    font-size: 0.9rem;
+  }
+
+  .game-tag {
+    font-size: 0.75rem;
+  }
+
+  .install-btn {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    width: 80px;
+  }
+
+  .install-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* 在结果弹窗中的游戏推荐样式调整 */
+.result-game-recommends {
+  margin-top: 1.5rem;
+  background: transparent;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.result-game-recommends::before {
+  display: none;
+}
+
+.result-game-recommends .game-list {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: 5px;
+}
+
+.result-game-recommends .game-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.result-game-recommends .game-list::-webkit-scrollbar-thumb {
+  background: rgba(67, 97, 238, 0.3);
+  border-radius: 10px;
+}
+
+.result-game-recommends .game-card {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .result-game-recommends .game-list {
+    max-height: 400px;
   }
 }
 </style>

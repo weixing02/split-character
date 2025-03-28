@@ -16,9 +16,9 @@
         }"
         @click="handleCardClick('lazy')"
       >
-        <div class="hp-bar">
-          <div class="hp-fill" :style="{ width: `${lazyHP}%` }"></div>
-          <span class="hp-text">HP: {{ lazyHP }}/100</span>
+        <div class="health-bar">
+          <div class="health-value" :style="{ width: `${lazyHP}%` }"></div>
+          <span class="health-text">HP: {{ lazyHP }}/100</span>
         </div>
 
         <div class="card-animation">
@@ -72,9 +72,12 @@
         }"
         @click="handleCardClick('productive')"
       >
-        <div class="hp-bar">
-          <div class="hp-fill" :style="{ width: `${productiveHP}%` }"></div>
-          <span class="hp-text">HP: {{ productiveHP }}/100</span>
+        <div class="health-bar">
+          <div
+            class="health-value"
+            :style="{ width: `${productiveHP}%` }"
+          ></div>
+          <span class="health-text">HP: {{ productiveHP }}/100</span>
         </div>
 
         <div class="card-animation">
@@ -806,37 +809,29 @@ export default {
 /* 移动优先设计 - 基础样式适用于手机 */
 .battle-arena {
   background: var(--bg-card);
+  padding: 2rem;
   border-radius: var(--border-radius-lg);
-  padding: 1rem 0.8rem;
-  margin: 0.5rem 0;
-  box-shadow: var(--shadow-md);
+  margin-bottom: 3rem;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(67, 97, 238, 0.2);
-}
-
-.battle-arena::before,
-.battle-arena::after {
-  content: "";
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  filter: blur(30px);
-  opacity: 0.15;
-  z-index: 0;
+  box-shadow: var(--shadow-md);
+  border: 2px solid rgba(108, 125, 71, 0.5);
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0-1a6 6 0 1 1 0-12 6 6 0 0 1 0 12z' fill='%2381B29A' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 .battle-arena::before {
-  top: -50px;
-  right: -50px;
-  background: var(--primary);
-}
-
-.battle-arena::after {
-  bottom: -50px;
-  left: -50px;
-  background: var(--secondary);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='120' viewBox='0 0 300 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M300,0 L300,70 Q150,160 0,70 L0,0 L300,0 Z' fill='%2381B29A' fill-opacity='0.05'/%3E%3C/svg%3E");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .battle-title {
@@ -877,53 +872,70 @@ export default {
 }
 
 .personality-card {
-  flex: 1;
   background: var(--bg-light);
-  border-radius: var(--border-radius-lg);
-  padding: 0.8rem 0.4rem;
-  text-align: center;
-  transition: var(--transition-bounce);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
-  z-index: 1;
-  border: 1px solid rgba(67, 97, 238, 0.2);
-}
-
-.personality-card.lazy-side {
-  background: linear-gradient(
-    135deg,
-    var(--bg-light),
-    var(--bg-light) 60%,
-    rgba(67, 97, 238, 0.1)
-  );
-}
-
-.personality-card.productive-side {
-  background: linear-gradient(
-    135deg,
-    var(--bg-light),
-    var(--bg-light) 60%,
-    rgba(0, 245, 212, 0.1)
-  );
+  border: 1px solid rgba(108, 125, 71, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: var(--transition);
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .personality-card::before {
   content: "";
   position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--bg-light);
+  z-index: -1;
+  transform: translateZ(-10px);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 10px 30px rgba(61, 64, 91, 0.1);
+  opacity: 0.7;
+}
+
+.personality-card:hover {
+  transform: translateY(-5px) rotateY(5deg);
+}
+
+.health-bar {
+  height: 14px;
+  width: 100%;
+  background: rgba(224, 122, 95, 0.2);
+  border-radius: 7px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(224, 122, 95, 0.3);
+  position: relative;
+}
+
+.health-bar::after {
+  content: "";
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 3px;
-  z-index: 2;
+  right: 0;
+  height: 40%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px 3px 0 0;
 }
 
-.lazy-side::before {
-  background: var(--primary-gradient);
-}
-
-.productive-side::before {
-  background: var(--secondary-gradient);
+.health-value {
+  height: 100%;
+  background: linear-gradient(90deg, #e07a5f, #f2cc8f);
+  border-radius: 6px;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 1;
 }
 
 .card-animation {
@@ -1414,33 +1426,6 @@ export default {
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
-}
-
-/* HP相关样式 */
-.hp-bar {
-  position: absolute;
-  top: 0.3rem;
-  left: 0.3rem;
-  right: 0.3rem;
-  height: 6px;
-  background: var(--bg-dark);
-  border-radius: 3px;
-  overflow: hidden;
-  z-index: 2;
-}
-
-.hp-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #2ecc71, #27ae60);
-  transition: width 0.5s ease;
-}
-
-.hp-text {
-  position: absolute;
-  top: -1rem;
-  right: 0;
-  font-size: 0.7rem;
-  color: var(--text-secondary);
 }
 
 /* 平板和桌面端优化 */

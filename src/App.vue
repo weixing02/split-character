@@ -16,42 +16,88 @@ export default {
 </script>
 
 <style>
+/* 全局样式 */
+body {
+  font-family: "Arial Rounded MT Bold", "Nunito", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a1d9c1' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
 :root {
-  /* 主色调 */
+  /* 颜色变量 */
   --primary: #4361ee;
-  --primary-dark: #3a0ca3;
-  --secondary: #00f5d4;
-  --accent: #fee440;
+  --primary-dark: #3a56d4;
+  --secondary: #f15bb5;
+  --accent: #00bbf9;
+  --bg-main: #f8f9fa;
+  --bg-card: #ffffff;
+  --bg-light: #f1f3f9;
+  --text-primary: #333;
+  --text-secondary: #718096;
 
   /* 渐变 */
-  --primary-gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
-  --secondary-gradient: linear-gradient(135deg, #00f5d4, #00b4d8);
-  --accent-gradient: linear-gradient(135deg, #fee440, #f8961e);
+  --primary-gradient: linear-gradient(135deg, #4361ee, #3a56d4);
+  --accent-gradient: linear-gradient(135deg, #00bbf9, #4361ee);
+  --success-gradient: linear-gradient(135deg, #4ade80, #22c55e);
+  --warning-gradient: linear-gradient(135deg, #fbbf24, #f59e0b);
+  --danger-gradient: linear-gradient(135deg, #f87171, #ef4444);
 
-  /* 背景色 */
-  --bg-dark: #1a1b1e;
-  --bg-card: #252729;
-  --bg-light: #2a2b2e;
-
-  /* 文字颜色 */
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-tertiary: rgba(255, 255, 255, 0.5);
-
-  /* 阴影 */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-neon: 0 0 20px rgba(67, 97, 238, 0.3);
-
-  /* 圆角 */
-  --border-radius-sm: 8px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 20px;
+  /* 边角和阴影 */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 
   /* 动画 */
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition: all 0.3s ease;
+}
+
+/* ... existing code ... */
+
+/* 全局样式 */
+body {
+  font-family: "Arial Rounded MT Bold", "Nunito", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a1d9c1' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+:root {
+  /* 吉卜力风格颜色变量 */
+  --primary: #6c7d47; /* 灰绿色 - 自然森林 */
+  --primary-dark: #567447; /* 深绿色 - 龙猫色调 */
+  --secondary: #e07a5f; /* 暖红色 - 天空之城 */
+  --accent: #81b29a; /* 薄荷绿 - 绿意盎然 */
+  --bg-main: #f9f1e6; /* 米色纸张 - 温暖背景 */
+  --bg-card: #faf6ed; /* 浅米色 - 卡片背景 */
+  --bg-light: #f2e9de; /* 更浅的米色 - 轻质纸张 */
+  --text-primary: #3d405b; /* 深蓝灰 - 主文字 */
+  --text-secondary: #787a91; /* 浅灰蓝 - 次要文字 */
+
+  /* 渐变 */
+  --primary-gradient: linear-gradient(135deg, #6c7d47, #567447);
+  --accent-gradient: linear-gradient(135deg, #81b29a, #6c7d47);
+  --success-gradient: linear-gradient(135deg, #81b29a, #6c7d47);
+  --warning-gradient: linear-gradient(135deg, #f2cc8f, #e07a5f);
+  --danger-gradient: linear-gradient(135deg, #e07a5f, #d56c50);
+
+  /* 柔和圆角和轻微阴影 - 吉卜力风格更圆润自然 */
+  --border-radius-sm: 0.5rem;
+  --border-radius-md: 0.75rem;
+  --border-radius-lg: 1.5rem;
+  --shadow-sm: 0 2px 4px rgba(61, 64, 91, 0.1);
+  --shadow-md: 0 4px 8px rgba(61, 64, 91, 0.1);
+  --shadow-lg: 0 6px 16px rgba(61, 64, 91, 0.1);
+
+  /* 柔和过渡 */
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {

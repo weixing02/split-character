@@ -697,9 +697,15 @@ export default {
         ESFP: "派对恶魔",
       };
 
-      const selectedType = this.selectedSide;
+      // 确保selectedSide已设置，如果未设置则默认为lazy
+      const selectedType = this.selectedSide || "lazy";
       const traits = mbtiTraits[selectedType];
       const title = mbtiTitles[this.mbtiType] || "未知旅行者";
+
+      // 防止mbtiType未设置的情况
+      if (!this.mbtiType) {
+        this.mbtiType = this.generateMBTIType();
+      }
 
       // 使用保存的MBTI类型，而不是每次都重新生成
       return `你的MBTI类型倾向：${this.mbtiType}「${title}」\n

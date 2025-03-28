@@ -700,22 +700,25 @@ export default {
       // 确保selectedSide已设置，如果未设置则默认为lazy
       const selectedType = this.selectedSide || "lazy";
       const traits = mbtiTraits[selectedType];
-      const title = mbtiTitles[this.mbtiType] || "未知旅行者";
 
       // 防止mbtiType未设置的情况
       if (!this.mbtiType) {
         this.mbtiType = this.generateMBTIType();
       }
 
-      // 使用保存的MBTI类型，而不是每次都重新生成
-      return `你的MBTI类型倾向：${this.mbtiType}「${title}」\n
-${traits.E}/${traits.I}\n
-${traits.S}/${traits.N}\n
-${traits.T}/${traits.F}\n
-${traits.J}/${traits.P}\n
-这种性格特质让你在${
-        selectedType === "lazy" ? "摆烂" : "卷王"
-      }的道路上独具特色。`;
+      const title = mbtiTitles[this.mbtiType] || "未知旅行者";
+
+      // 修改模板字符串格式，避免格式化导致的宽度变化
+      return [
+        `你的MBTI类型倾向：${this.mbtiType}「${title}」`,
+        `${traits.E}/${traits.I}`,
+        `${traits.S}/${traits.N}`,
+        `${traits.T}/${traits.F}`,
+        `${traits.J}/${traits.P}`,
+        `这种性格特质让你在${
+          selectedType === "lazy" ? "摆烂" : "卷王"
+        }的道路上独具特色。`,
+      ].join("\n");
     },
     generateMBTIType() {
       // 直接生成 MBTI 类型，不需要预定义数组
@@ -1199,6 +1202,7 @@ ${traits.J}/${traits.P}\n
   box-shadow: var(--shadow-lg), 0 0 20px rgba(67, 97, 238, 0.2);
   overflow-y: auto;
   max-height: 85vh;
+  box-sizing: border-box;
 }
 
 .result-content::before {
@@ -1321,6 +1325,8 @@ ${traits.J}/${traits.P}\n
   padding: 1rem;
   margin-top: 1rem;
   border: 1px solid rgba(67, 97, 238, 0.2);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mbti-title {
@@ -1344,6 +1350,10 @@ ${traits.J}/${traits.P}\n
   font-size: 0.9rem;
   white-space: pre-line;
   text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+  display: inline-block;
 }
 
 .fortune-analysis {
@@ -1354,6 +1364,8 @@ ${traits.J}/${traits.P}\n
   border: 1px solid rgba(67, 97, 238, 0.2);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .fortune-analysis::before {
